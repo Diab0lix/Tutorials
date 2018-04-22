@@ -3,16 +3,16 @@
 
 To try this tutorial on you Arduino board you have to connect a Led. The pin used here is the 13 but of course you can change it in the code if you want to use another one.
 
-As on the publisher example you first have to include the libraries. On of the them depends on the message you are transferring with ROS. In the following example we will choose an empty message. This means that the message doesn’t contain anything. So when the subscriber receives the message, it doesn’t react depending on its content but it only reacts because a message has been sent. As the type of the std_msg is «Empty», you have to include the following lines at the beginning of your Arduino code :
+As in the Arduino Publisher Tutorial you first have to include the libraries. One of them depends on the message you are transferring with ROS. In the following example we will choose an empty message. This means that the message doesn’t contain anything. So when the subscriber receives the message, it doesn’t react depending on its content but it only reacts because a message has been sent. As the type of the std_msg is «Empty», you have to include the following lines at the beginning of your Arduino code :
 ```
 #include <ros.h>
 #include <std_msgs/Empty.h>
 ```
-Here again, like the publisher code, you have to start a ROS node with this line :
+Here again, like the Arduino Publisher Tutorial code, you have to start a ROS node with this line :
 ```
 ros::NodeHandle nh;
 ```
-Then you initiate the callback function where you have to specify the name of the callback (messageCb), the type of the message (std_msgs::Empty) and the name of the message(toggle_msg). The callback is the function called each time you receive a message. If toggle_msg had a content you could use it in the callback but it is not the case as the message is of type «Empty». 
+Then you initiate the callback function where you have to specify the name of the callback (messageCb), the type of the message (std_msgs::Empty) and the name of the message (toggle_msg which contains the transferred message). The callback is the function called each time you receive a message. If toggle_msg had a content you could use it in the callback but it is not the case here as the message is of type «Empty». 
 ```
 void messageCb( const std_msgs::Empty& toggle_msg){
   digitalWrite(13, HIGH-digitalRead(13));   // blink the led
@@ -83,7 +83,7 @@ void loop()
   delay(1);
 }
 ```
-You have to upload this code on the Arduino board before connecting it to the Raspberry starting the test on ROS.
+You have to upload this code on the Arduino board before connecting it to the Raspberry and before starting the test on ROS.
 
 # Test on a Raspberry #
 
@@ -102,7 +102,7 @@ rosrun rosserial_python serial_node.py /dev/ttyUSB0
 ```
 ls /dev/tty*
 ```
-when you plug the Arduino in the Raspberry port, you can execute this previous command to see which port has been added and thus know which one is the Arduino board.
+when you plug the Arduino in the Raspberry usb port, you can execute this previous command to see which port has been added and thus know which one is the Arduino board.
 
 Finally, in order to send a single message to the Arduino, you can publish on a specific topic by typing on another terminal window :
 ```
