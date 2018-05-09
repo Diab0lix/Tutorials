@@ -30,6 +30,7 @@ where msg is the name of the object. And of course you can choose the type of th
 Then you have to choose if you want to create a publisher, a subscriber or even both.
 
 To create a publisher :
+
 ```
 ros::Publisher chatter("chatter", &msg);
 ```
@@ -67,6 +68,7 @@ void loop()
    chatter.publish( &str_msg );
 }
 ```
+
 
 Finally you have to add a last line of code in the loop that will call all the callbacks waiting to be called at that point in time :
 ```
@@ -106,6 +108,7 @@ void loop()
   delay(1000);
 }
 ```
+
 You have to upload this code on the Arduino board before connecting it to the Raspberry and before starting the test on ROS.
 
 
